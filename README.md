@@ -36,7 +36,7 @@ pip install -r requirements.txt
 from discordia_client import discordia
 
 token = ""
-client = discordia(bot_token)
+client = discordia(token)
 
 # get info about the bot user
 print(client.get_me())
