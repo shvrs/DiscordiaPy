@@ -1,18 +1,19 @@
-name: Publish Python Package to PyPI !
+name: Publish Python Package to PyPI ! # Decoded workflow name
 
 on:
   release:
     types: [published]
-  workflow_dispatch:
+  workflow_dispatch: # Allows manual triggering from GitHub Actions tab
 
 jobs:
   pypi-publish:
-    name: Publish distributions to PyPI
-    runs-on: ubuntu-22.04
+    name: Publish distributions to PyPI # Job name
+    runs-on: ubuntu-22.04 # Using the specific Ubuntu version you specified
 
+    # Essential for PyPI OIDC authentication
     permissions:
-      id-token: write
-      contents: read
+      id-token: write # Allows the workflow to fetch an OIDC token for PyPI
+      contents: read  # Allows the workflow to checkout your repository code
 
     steps:
       - name: Checkout repository code
@@ -21,19 +22,26 @@ jobs:
       - name: Set up Python 3.7
         uses: actions/setup-python@v5
         with:
-          python-version: '3.7'
-          cache: 'pip'
+          python-version: '3.7' # Keeping your desired Python version
+          cache: 'pip' # Good for caching Python dependencies
 
       - name: Install build tool
         run: |
           python -m pip install --upgrade pip
-          pip install build
+          pip install build # 'build' is sufficient for this purpose
 
       - name: Build source distribution and wheel
+        # Builds a source distribution (.tar.gz) and a wheel (.whl) into the 'dist/' directory
         run: python -m build --sdist --wheel --outdir dist/ .
 
       - name: Publish package to PyPI
-        # CHANGE THIS LINE: Update to a newer version
-        uses: pypa/gh-action-pypi-publish@v1.10.0 # <--- Changed from v1.9.0
+        # Using the recommended 'release/v1' tag for the latest stable version of the action
+        uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          project_name: DiscordiaPy
+          # --- CRITICAL CHANGE ---
+          # REMOVED the 'project_name' input. This was causing the "Unexpected input" error.
+          # The action automatically detects the project name from your pyproject.toml or setup.py.
+          # -----------------------
+
+          verbose: true # Added for more detail to the logs for easier debugging
+          # attestations: true # Uncomment if you want to enable PyPI attestations (recommended security feature)
