@@ -33,6 +33,7 @@ jobs:
         run: python -m build --sdist --wheel --outdir dist/ .
 
       - name: Publish package to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+        # CHANGE THIS LINE: Specify a newer version like v1.9.0
+        uses: pypa/gh-action-pypi-publish@v1.9.0 # <--- CHANGED THIS LINE
         with:
           project_name: DiscordiaPy
