@@ -74,6 +74,6 @@ client.send_message(channel_id, "hi from discordia")
 
 ## license
 
-[mit](license)
+[mit](LICENSE)
 
 ---
