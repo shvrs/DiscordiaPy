@@ -56,13 +56,19 @@ client.send_message(channel_id, "hi from discordia")
 ---
 
 ## project structure
-
-- `discordia_client.py` – main api wrapper
-- `discordia_init.py` – version and imports
+- 📂 discordia
+- `client.py` – main api wrapper
+- `discordinit.py` – version and imports
+-  ❌ no folder
 - `pyproject.toml` – build system
 - `setup.cfg` – package metadata/configuration
+- `setup.py` - package metadata/configuration
+- `setup.cfg`
 - `readme.md` – this file
 - `license` – license
+- 📂 dist
+- `discordia-0.1.0.tar.gz` - tar.gz file for installing
+- `Discordia-0.1.0-py3-none-any.whl` .whl file for installing
 
 ---
 
