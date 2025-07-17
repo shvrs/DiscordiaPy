@@ -8,7 +8,7 @@ on:
 jobs:
   pypi-publish:
     name: Publish distributions to PyPI
-    runs-on: ubuntu-22.04 # <--- This is the key change for Python 3.7 support
+    runs-on: ubuntu-22.04
 
     permissions:
       id-token: write
@@ -21,7 +21,7 @@ jobs:
       - name: Set up Python 3.7
         uses: actions/setup-python@v5
         with:
-          python-version: '3.7' # This will now be found on ubuntu-22.04
+          python-version: '3.7'
           cache: 'pip'
 
       - name: Install build tool
@@ -33,6 +33,9 @@ jobs:
         run: python -m build --sdist --wheel --outdir dist/ .
 
       - name: Publish package to PyPI
+        # This line must be EXACTLY as below:
+        # uses: pypa/gh-action-pypi-publish@v1.9.0
         uses: pypa/gh-action-pypi-publish@v1.9.0
+        # The 'with:' block must be indented by exactly 4 spaces (2 levels from '- name:')
         with:
           project_name: DiscordiaPy
