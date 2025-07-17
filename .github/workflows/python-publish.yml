@@ -8,7 +8,7 @@ on:
 jobs:
   pypi-publish:
     name: Publish distributions to PyPI
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04 # <--- This is the key change for Python 3.7 support
 
     permissions:
       id-token: write
@@ -21,7 +21,7 @@ jobs:
       - name: Set up Python 3.7
         uses: actions/setup-python@v5
         with:
-          python-version: '3.7' # <--- CHANGED TO 3.7
+          python-version: '3.7' # This will now be found on ubuntu-22.04
           cache: 'pip'
 
       - name: Install build tool
