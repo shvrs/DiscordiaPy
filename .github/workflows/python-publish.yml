@@ -33,9 +33,7 @@ jobs:
         run: python -m build --sdist --wheel --outdir dist/ .
 
       - name: Publish package to PyPI
-        # This line must be EXACTLY as below:
-        # uses: pypa/gh-action-pypi-publish@v1.9.0
-        uses: pypa/gh-action-pypi-publish@v1.9.0
-        # The 'with:' block must be indented by exactly 4 spaces (2 levels from '- name:')
+        # CHANGE THIS LINE: Update to a newer version
+        uses: pypa/gh-action-pypi-publish@v1.10.0 # <--- Changed from v1.9.0
         with:
           project_name: DiscordiaPy
