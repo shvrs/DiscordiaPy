@@ -19,7 +19,7 @@ class DiscordiaPy:
         return {
             "Authorization": f"Bot {self.token}",
             "Content-Type": "application/json",
-            "User-Agent": "discordia/0.1.0"
+            "User-Agent": "DiscordiaPy/0.1.0"
         }
 
     # user stuff
