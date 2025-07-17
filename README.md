@@ -66,8 +66,8 @@ client.send_message(channel_id, "hi from discordia")
 - `readme.md` – this file
 - `license` – license
 - 📂 dist
-- `discordia-0.1.0.tar.gz` - tar.gz file for installing
-- `Discordia-0.1.0-py3-none-any.whl` .whl file for installing
+- `discordiapy-0.1.0.tar.gz` - tar.gz file for installing
+- `DiscordiaPy-0.1.0-py3-none-any.whl` .whl file for installing
 
 ---
 
