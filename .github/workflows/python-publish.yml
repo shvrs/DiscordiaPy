@@ -1,19 +1,20 @@
-name: Publish Python Package to PyPI # Decoded workflow name
+name: Publish Python Package to PyPI
 
 on:
   release:
-    types: [published]
-  workflow_dispatch: # Allows manual triggering from GitHub Actions tab
+    types: [published] # Trigger on new GitHub releases
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
 
 jobs:
   pypi-publish:
-    name: Publish distributions to PyPI # Job name
-    runs-on: ubuntu-22.04 # Using the specific Ubuntu version you specified
+    name: Publish distributions to PyPI
+    runs-on: ubuntu-22.04
 
-    # Essential for PyPI OIDC authentication
-    permissions:
-      id-token: write # Allows the workflow to fetch an OIDC token for PyPI
-      contents: read  # Allows the workflow to checkout your repository code
+    # IMPORTANT: Permissions for OIDC are TEMPORARILY REMOVED for API token upload.
+    # You will re-add this block later for OIDC.
+    # permissions:
+    #   id-token: write
+    #   contents: read
 
     steps:
       - name: Checkout repository code
@@ -22,26 +23,21 @@ jobs:
       - name: Set up Python 3.7
         uses: actions/setup-python@v5
         with:
-          python-version: '3.7' # Keeping your desired Python version
-          cache: 'pip' # Good for caching Python dependencies
+          python-version: '3.7'
+          cache: 'pip'
 
       - name: Install build tool
         run: |
           python -m pip install --upgrade pip
-          pip install build # 'build' is sufficient for this purpose
+          pip install build
 
       - name: Build source distribution and wheel
-        # Builds a source distribution (.tar.gz) and a wheel (.whl) into the 'dist/' directory
         run: python -m build --sdist --wheel --outdir dist/ .
 
-      - name: Publish package to PyPI
-        # Using the recommended 'release/v1' tag for the latest stable version of the action
+      - name: Publish package to PyPI (Initial Upload with Token)
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          # --- CRITICAL CHANGE ---
-          # REMOVED the 'project_name' input. This was causing the "Unexpected input" error.
-          # The action automatically detects the project name from your pyproject.toml or setup.py.
-          # -----------------------
-
-          verbose: true # Added for more detail to the logs for easier debugging
-          # attestations: true # Uncomment if you want to enable PyPI attestations (recommended security feature)
+          user: __token__ # Required for API token authentication
+          password: ${{ secrets.PYPI_API_TOKEN }} # Uses the GitHub Secret you created
+          verbose: true
+          # attestations: true # Keep commented for initial upload
