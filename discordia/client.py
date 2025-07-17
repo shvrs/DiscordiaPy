@@ -3,7 +3,7 @@ import requests
 class DiscordAPIError(Exception):
     pass
 
-class Discordia:
+class DiscordiaPy:
     """
     basic python wrapper for discord's rest api.
     """

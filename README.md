@@ -19,7 +19,7 @@ it lets you interact with discord as a bot without needing a gateway connectionâ
 install from pypi:
 
 ```sh
-pip install discordia
+pip install discordiapy
 ```
 
 or, for development, clone the repo and install dependencies:
@@ -33,10 +33,10 @@ pip install -r requirements.txt
 ## usage
 
 ```python
-from discordia_client import discordia
+from client import discordiapy
 
 token = ""
-client = discordia(token)
+client = discordiapy(token)
 
 # get info about the bot user
 print(client.get_me())

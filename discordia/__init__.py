@@ -1,3 +1,3 @@
-from client import Discordia, DiscordAPIError
+from client import DiscordiaPy, DiscordAPIError
 
 __version__ = "0.1.0"
