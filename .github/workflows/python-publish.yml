@@ -5,7 +5,7 @@ on:
     types: [published]
 
 permissions:
-  contents: read  # enough, no id-token needed
+  contents: read  # no id-token: write
 
 jobs:
   release-build:
