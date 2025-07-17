@@ -1,43 +1,38 @@
-# This workflow publishes your Python package to PyPI using Trusted Publishers (OIDC).
-# It will only run on pushes to the 'main' branch (or your default branch).
-
 name: Publish Python Package to PyPI
 
 on:
   release:
-    types: [published] # This is recommended for production releases
-  workflow_dispatch: # Allows manual trigger for testing
+    types: [published]
+  workflow_dispatch:
 
 jobs:
   pypi-publish:
-    name: Publish package distributions to PyPI
+    name: Publish distributions to PyPI
     runs-on: ubuntu-latest
 
-    # IMPORTANT: This permission is crucial for OIDC authentication with PyPI.
-    # It allows the workflow to request an OIDC token.
     permissions:
-      id-token: write # Required for trusted publishing
-      contents: read # To checkout the repository code
+      id-token: write
+      contents: read
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repository code
         uses: actions/checkout@v4
 
       - name: Set up Python 3.9
         uses: actions/setup-python@v5
         with:
-          python-version: '3.9' # Explicitly set to 3.9
-          cache: 'pip' # Cache pip dependencies for faster builds
+          python-version: '3.9'
+          cache: 'pip'
 
-      - name: Install build dependencies
+      - name: Install build tool
         run: |
           python -m pip install --upgrade pip
-          pip install build # Install the 'build' package to create sdist and wheel
+          pip install build
 
-      - name: Build sdist and wheel
+      - name: Build source distribution and wheel
         run: python -m build --sdist --wheel --outdir dist/ .
 
-      - name: Publish package distributions to PyPI
+      - name: Publish package to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
-        # No 'with:' section for username/password/token is needed here
-        # as it uses OIDC automatically based on the 'id-token: write' permission.
+        with:
+          project_name: DiscordiaPy
