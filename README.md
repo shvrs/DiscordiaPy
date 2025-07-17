@@ -1,6 +1,6 @@
-# discordia
+# discordiapy
 
-**discordia** is a basic python wrapper for discord's rest api (bot token only).  
+**discordiapy** is a basic python wrapper for discord's rest api (bot token only).  
 it lets you interact with discord as a bot without needing a gateway connection—just use http requests.
 
 ---
@@ -56,14 +56,13 @@ client.send_message(channel_id, "hi from discordia")
 ---
 
 ## project structure
-- 📂 discordia
+- 📂 discordiapy
 - `client.py` – main api wrapper
-- `discordinit.py` – version and imports
+- `__init__.py` – version and imports
 -  ❌ no folder
 - `pyproject.toml` – build system
 - `setup.cfg` – package metadata/configuration
 - `setup.py` - package metadata/configuration
-- `setup.cfg`
 - `readme.md` – this file
 - `license` – license
 - 📂 dist
